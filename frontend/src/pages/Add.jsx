@@ -57,7 +57,7 @@ const Add = () => {
         name="cover"
         onChange={handleChange}
       />
-      <button className="formbutton" onClick={handleClick}>
+      <button className="formButton" onClick={handleClick}>
         Add
       </button>
       {error && "Something went wrong!"}

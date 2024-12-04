@@ -81,3 +81,15 @@ input{
   font-weight: bold;
   cursor: pointer;
 }
+
+.addHome{
+  border: none;
+  border-radius: 7px;
+  padding: 12px;
+  margin-top:5px;
+  background-color: rgba(0, 84, 167, 0.712);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+
+}

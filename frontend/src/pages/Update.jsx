@@ -60,7 +60,7 @@ const Update = () => {
         name="cover"
         onChange={handleChange}
       />
-      <button className="formbutton" onClick={handleClick}>
+      <button className="formButton" onClick={handleClick}>
         Update
       </button>
       {error && <p className="error">Something went wrong!</p>}
