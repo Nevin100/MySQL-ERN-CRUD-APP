@@ -1,61 +1,65 @@
-import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-//Main Add Function:
+import React from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 const Add = () => {
-  const [book, setbook] = useState({
+  const [book, setBook] = useState({
     title: "",
     desc: "",
     price: null,
     cover: "",
-  }); // using useState to handle the state
+  });
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setbook((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setBook((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  //axios to post
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8800/books", book); //json obj : book
+      await axios.post("http://localhost:8800/books", book);
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      setError(true);
     }
   };
-  console.log(book);
 
   return (
     <div className="form">
-      <h1> Add New Book </h1>
+      <h1>Add New Book</h1>
       <input
         type="text"
-        placeholder="Title"
-        onChange={handleChange}
+        placeholder="Book title"
         name="title"
-      />
-      <input
-        type="text"
-        placeholder="Description"
         onChange={handleChange}
+      />
+      <textarea
+        rows={5}
+        type="text"
+        placeholder="Book desc"
         name="desc"
+        onChange={handleChange}
       />
       <input
         type="number"
-        placeholder="Price:"
-        onChange={handleChange}
+        placeholder="Book price"
         name="price"
+        onChange={handleChange}
       />
       <input
         type="text"
-        placeholder="Cover"
-        onChange={handleChange}
+        placeholder="Book cover"
         name="cover"
+        onChange={handleChange}
       />
-      <button onClick={handleClick}>ADD</button>
+      <button onClick={handleClick}>Add</button>
+      {error && "Something went wrong!"}
+      <Link to="/">See all books</Link>
     </div>
   );
 };

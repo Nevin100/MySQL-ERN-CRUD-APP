@@ -3,9 +3,11 @@ import Books from "./pages/Books.jsx";
 import Add from "./pages/Add.jsx";
 import Update from "./pages/Update.jsx";
 import "./index.css";
+import "./style.css";
+
 function App() {
   return (
-    <div className="app">
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Books />} />

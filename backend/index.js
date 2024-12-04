@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.json("Hello this is from backend ");
 });
 
-//Routes:
+//Read Route :
 app.get("/books", (req, res) => {
   const q = "SELECT * FROM books"; // query state in mysql and pass it as a argument using db-identifier.query
   db.query(q, (err, data) => {
@@ -32,7 +32,7 @@ app.get("/books", (req, res) => {
   });
 });
 
-//post:
+//Update Route:
 app.post("/books", (req, res) => {
   const q = "INSERT INTO books (`title`,`desc`,`price`,`cover`) VALUES (?)";
   const values = [
@@ -50,6 +50,19 @@ app.post("/books", (req, res) => {
   });
 });
 
+//Delete Route :
+app.delete("/books/:id", (req, res) => {
+  const bookId = req.params.id;
+  const q = "DELETE FROM books WHERE id = ?";
+
+  db.query(q, [bookId], (err, data) => {
+    if (err) {
+      res.json("Book Has been deleted successfully !");
+    } else {
+      res.json(err);
+    }
+  });
+});
 app.listen(8800, () => {
   console.log("The Server is running!!");
 });
