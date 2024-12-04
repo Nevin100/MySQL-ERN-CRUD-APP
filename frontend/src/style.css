@@ -1,6 +1,6 @@
 .App {
-  height: auto;
-  padding: 0 55px;
+  height: 100vh;
+  padding: 0 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,3 +58,26 @@ button {
   text-decoration: none;
 }
     
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input{
+  width: 250px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 7px;
+  outline: none;
+}
+
+.formbutton{
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  background-color: rgb(253, 171, 64);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

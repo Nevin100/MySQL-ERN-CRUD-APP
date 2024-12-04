@@ -20,19 +20,9 @@ app.get("/", (req, res) => {
   res.json("Hello this is from backend ");
 });
 
-//Read Route :
-app.get("/books", (req, res) => {
-  const q = "SELECT * FROM books"; // query state in mysql and pass it as a argument using db-identifier.query
-  db.query(q, (err, data) => {
-    if (err) {
-      res.status(401).json({ err: true, message: "Error occured" });
-    } else {
-      return res.json(data);
-    }
-  });
-});
+//ALL ROUTES :
 
-//Update Route:
+//Create Route:
 app.post("/books", (req, res) => {
   const q = "INSERT INTO books (`title`,`desc`,`price`,`cover`) VALUES (?)";
   const values = [
@@ -50,6 +40,39 @@ app.post("/books", (req, res) => {
   });
 });
 
+//Read Route :
+app.get("/books", (req, res) => {
+  const q = "SELECT * FROM books"; // query state in mysql and pass it as a argument using db-identifier.query
+  db.query(q, (err, data) => {
+    if (err) {
+      res.status(401).json({ err: true, message: "Error occured" });
+    } else {
+      return res.json(data);
+    }
+  });
+});
+
+//Update Route :
+app.put("/books/:id", (req, res) => {
+  const bookId = req.params.id;
+  const q =
+    "UPDATE books SET `title` = ?, `desc` = ?,`price` = ?,`cover` = ? WHERE id = ?";
+
+  const values = [
+    req.body.title,
+    req.body.desc,
+    req.body.price,
+    req.body.cover,
+  ];
+  db.query(q, [...values, bookId], (err, data) => {
+    if (err) {
+      res.json("Book has been updated successfully !");
+    } else {
+      res.json(err);
+    }
+  });
+});
+
 //Delete Route :
 app.delete("/books/:id", (req, res) => {
   const bookId = req.params.id;
@@ -57,12 +80,13 @@ app.delete("/books/:id", (req, res) => {
 
   db.query(q, [bookId], (err, data) => {
     if (err) {
-      res.json("Book Has been deleted successfully !");
+      res.json("Book has been deleted successfully !");
     } else {
       res.json(err);
     }
   });
 });
+
 app.listen(8800, () => {
   console.log("The Server is running!!");
 });
