@@ -44,12 +44,7 @@ const Books = () => {
               Delete
             </button>
             <button className="update">
-              <Link
-                to={`/update/${book.id}`}
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                Update
-              </Link>
+              <Link to={`/update/${book.id}`}>Update</Link>
             </button>
           </div>
         ))}
